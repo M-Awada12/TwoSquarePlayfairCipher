@@ -137,6 +137,14 @@
 }
 
 @media screen and (max-width: 1050px) {
+
+  .title-navbar {
+    padding-left: 20px;
+    color: #2980b9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 50%;
+  }
+  
   .nav-menu {
     display: flex;
     flex-direction: column;

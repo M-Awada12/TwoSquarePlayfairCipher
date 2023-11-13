@@ -200,6 +200,9 @@ function Landing() {
         returnValue += result.charAt(index);
         index = index + 1;
       }
+      else if (character == '\n') {
+        returnValue += '\n';
+      }
       else {
         returnValue += character;
       }
@@ -223,28 +226,60 @@ function Landing() {
     }
   };
 
+  function chunkArray(array, size) {
+    const chunkedArray = [];
+    for (let i = 0; i < array.length; i += size) {
+      chunkedArray.push(array.slice(i, i + size));
+    }
+    return chunkedArray;
+  }
+
   function plainCipherTable() {
-    let plainArray = convertStringToArray(plain);
-    let cipherArray = convertStringToArray(cipher);
+    const plainArray = convertStringToArray(plain);
+    const cipherArray = convertStringToArray(cipher);
+
+    // Split the plain and cipher arrays into chunks of 5
+    const chunkedPlainArray = chunkArray(plainArray, 5);
+    const chunkedCipherArray = chunkArray(cipherArray, 5);
 
     return (
-      <div className="alphabet-table-container">
-        <table className="alphabet-table">
-          <thead>
-            <tr>
-              <td>Plaintext</td>
-              {plainArray.map((item, index) => (
-                <td onMouseEnter={() => handleCellHover(index)} onMouseLeave={() => handleCellHover(null)} key={index}>{item}</td>
-              ))}
-            </tr>
-            <tr>
-              <td>Ciphertext</td>
-              {cipherArray.map((item, index) => (
-                <td onMouseEnter={() => handleCellHover(index)} onMouseLeave={() => handleCellHover(null)} key={index}>{item}</td>
-              ))}
-            </tr>
-          </thead>
-        </table>
+      <div className="plainciphertable">
+        <div className="alphabet-table-container">
+          {chunkedPlainArray.map((chunk, chunkIndex) => (
+            <div className="separate">
+              <table
+                key={chunkIndex}
+                className="alphabet-table2">
+                <thead>
+                  <tr>
+                    <td>Plaintext</td>
+                    {chunk.map((item, index) => (
+                      <td
+                        onMouseEnter={() => handleCellHover(index + chunkIndex * 5)}
+                        onMouseLeave={() => handleCellHover(null)}
+                        key={index + chunkIndex * 5}
+                      >
+                        {item}
+                      </td>
+                    ))}
+                  </tr>
+                  <tr>
+                    <td>Ciphertext</td>
+                    {chunkedCipherArray[chunkIndex].map((item, index) => (
+                      <td
+                        onMouseEnter={() => handleCellHover(index + chunkIndex * 5)}
+                        onMouseLeave={() => handleCellHover(null)}
+                        key={index + chunkIndex * 5}
+                      >
+                        {item}
+                      </td>
+                    ))}
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
@@ -276,25 +311,32 @@ function Landing() {
 
           <div className="cool-input-container">
             <label className="awesome-label">{option == "Encrypt" ? "Plaintext" : "Ciphertext"}</label>
-            <input placeholder={option == "Encrypt" ? "Plaintext" : "Ciphertext"} className="awesome-input" onChange={(e) => handleChange(e, 'plain')} />
+            <textarea
+              placeholder={option === "Encrypt" ? "Plaintext" : "Ciphertext"}
+              className="awesome-input"
+              onChange={(e) => handleChange(e, 'plain')}
+              style={{ width: '250px', overflow: 'auto', resize: 'none' }}
+            />
           </div>
 
           <div className="result-container">
             <label className="awesome-label">{option != "Encrypt" ? "Plaintext" : "Ciphertext"}</label>
-            <label className="result-label">{cipher ? cipher : "None"}</label>
+            <div className="result-label" style={{ whiteSpace: 'pre-line', overflow: 'auto', maxWidth: '250px' }}>
+              {cipher ? cipher : "None"}
+            </div>
           </div>
         </div>
       </div>
       <div className="blue-line" />
       <div className="table-container">
-          {plain ? plainCipherTable() : null}
-          <div className="table1">
-            <label className="awesome-label alphabet-table">Key Tables:</label>
-            {generateTable(alphabetMatrix1, '1')}
-          </div>
-          <div className="table2">
-            {generateTable(alphabetMatrix2, '2')}
-          </div>
+        {plain ? plainCipherTable() : null}
+        <div className="table1">
+          <label className="awesome-label alphabet-table">Key Tables:</label>
+          {generateTable(alphabetMatrix1, '1')}
+        </div>
+        <div className="table2">
+          {generateTable(alphabetMatrix2, '2')}
+        </div>
       </div>
 
     </div>

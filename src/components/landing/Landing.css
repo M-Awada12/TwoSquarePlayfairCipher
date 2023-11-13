@@ -105,7 +105,18 @@ input:focus {
   padding-bottom: 20px;
 }
 
+.separate
+{
+  padding-bottom: 15px;
+}
+
 .alphabet-table {
+  border-collapse: collapse;
+  width: 40%;
+  margin-left: 30%;
+}
+
+.alphabet-table2 {
   border-collapse: collapse;
   width: 40%;
   margin-left: 30%;
@@ -118,8 +129,19 @@ input:focus {
   font-size: 18px;
 }
 
+.alphabet-table2 td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  font-size: 18px;
+}
+
 .alphabet-table td:hover {
-  background-color: #f5f5f5;
+  background-color: white;
+}
+
+.alphabet-table2 td:hover {
+  background-color: white;
 }
 
 .highlight {
@@ -132,5 +154,14 @@ input:focus {
 
 .blue {
   background-color: #2980b9;
+}
+
+@media screen and (max-width: 1050px) {
+
+  .alphabet-table2 {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
 }
 
