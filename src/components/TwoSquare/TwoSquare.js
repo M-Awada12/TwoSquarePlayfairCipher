@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./Landing.css";
+import "./TwoSquare.css";
 
-function Landing() {
+function TwoSquare() {
 
   const [alphabetMatrix1, setAlphabetMatrix1] = useState([["A", "B", "C", "D", "E"], ["F", "G", "H", "I", "K"], ["L", "M", "N", "O", "P"], ["Q", "R", "S", "T", "U"], ["V", "W", "X", "Y", "Z"]]);
   const [alphabetMatrix2, setAlphabetMatrix2] = useState([["A", "B", "C", "D", "E"], ["F", "G", "H", "I", "K"], ["L", "M", "N", "O", "P"], ["Q", "R", "S", "T", "U"], ["V", "W", "X", "Y", "Z"]]);
@@ -343,4 +343,4 @@ function Landing() {
   );
 }
 
-export default Landing;
+export default TwoSquare;

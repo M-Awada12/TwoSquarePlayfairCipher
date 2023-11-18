@@ -14,7 +14,7 @@ function NavBar() {
           <NavLink exact to="/" className="nav-logo">
             <img id="logo-image" src={security} alt="logo" />
           </NavLink>
-          <strong className="title-navbar">Two Square Playfair Cipher</strong>
+          <strong className="title-navbar">Cryptography and Network Security</strong>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
@@ -25,7 +25,18 @@ function NavBar() {
                 className="nav-links"
                 onClick={handleClick}
               >
-                Encrypt/Decrypt
+                Two Square Playfair Cipher
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/hill-cipher"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Hill Cipher
               </NavLink>
             </li>
             <li className="nav-item">
